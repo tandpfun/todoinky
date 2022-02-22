@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% assets 'main_css' %}
-    <link rel="stylesheet" href="{{ ASSET_URL }}" />
-    {% endassets %}
+    <link rel="stylesheet" href="/static/dist/main.css" />
     <title>TodoInky</title>
 
     <div id="components" class="hidden">
@@ -17,7 +15,7 @@
           value=""
         />
         <label class="form-check-label inline-block group">
-          <span class="itemText"></span>
+          <span class="itemText text-clip overflow-hidden"></span>
           <button
             class="text-red-500 transition duration-200 group-hover:opacity-100 opacity-0"
           >
@@ -44,8 +42,8 @@
   </head>
   <body>
     <div>
-      <div class="flex justify-center mt-24">
-        <div>
+      <div class="mt-24 mx-auto max-w-xl">
+        <div class="mx-8">
           <div>
             <h1 class="text-5xl font-bold mb-4">
               TodoInky <span class="text-lg">v0.1</span>
@@ -53,9 +51,10 @@
           </div>
           <div class="text-3xl">
             <div id="listParent"></div>
-            <div class="mt-2 flex flex-row items-center">
+            <div class="mt-2 flex flex-row items-center w-full">
               <input
-                class="bg-transparent border-b-2 focus:outline-none mr-2"
+                class="bg-transparent border-b-2 focus:outline-none mr-2 w-full rounded-none"
+                placeholder="Add an item..."
                 id="addItem"
                 onkeypress="addItemPress(event)"
               />

@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "npx tailwindcss -i ./static/src/main.css -o ./static/dist/main.css && python app.py"
+  },
   "dependencies": {
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.6",

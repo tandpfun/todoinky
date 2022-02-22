@@ -1,38 +1,31 @@
-from flask import Flask, render_template, request
-from flask_assets import Bundle, Environment
-import __main__
+import asyncio
 import threading
+from aiohttp import web
+from routes import setup_routes
+import aiohttp_jinja2
+import jinja2
 
-server = Flask(__name__)
-assets = Environment(server)
+PORT = 8080
+HOST = '0.0.0.0'
 
-css = Bundle('src/main.css', output='dist/main.css', filters='postcss', depends=('templates/index.html'))
-assets.register('main_css', css)
-css.build()
- 
-@server.route("/")
-def index():
-  return render_template("index.html", list=__main__.todoList, len=len(__main__.todoList))
+def aiohttp_server():
+  app = web.Application()
+  setup_routes(app)
+  app.add_routes([web.static('/static', 'static')])
+  aiohttp_jinja2.setup(app,loader=jinja2.FileSystemLoader('templates'))
 
-@server.route("/items")
-def items():
-  return {"items": __main__.todoList}
+  runner = web.AppRunner(app)
+  return runner
 
-@server.route("/syncitems", methods=['POST'])
-def sync():
-  body = request.json
-  if body == None or not isinstance(body, list):
-    return 'Invalid body', 400
-  
-  for item in body:
-    if not "name" in item or not "completed" in item:
-      return 'Invalid items', 400
-  
-  if len(body) > 50:
-    return 'Too many items', 400
+def run_server(runner):
+  loop = asyncio.new_event_loop()
+  asyncio.set_event_loop(loop)
+  loop.run_until_complete(runner.setup())
+  site = web.TCPSite(runner, HOST, PORT)
+  loop.run_until_complete(site.start())
+  loop.run_forever()
 
-  __main__.todoList = body
-  return {"items": __main__.todoList}
-
-# Run flask server
-threading.Thread(target=lambda: server.run(host="0.0.0.0", port="2000", debug=True, use_reloader=False)).start()
+def run():
+  t = threading.Thread(target=run_server, args=(aiohttp_server(),))
+  t.start()
+  print('SERVER: Online at http://' + HOST + ':' + str(PORT))
