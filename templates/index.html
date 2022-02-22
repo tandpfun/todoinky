@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% assets 'main_css' %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}" />
+    {% endassets %}
+    <title>TodoInky</title>
+
+    <div id="components" class="hidden">
+      <div class="flex items-center" id="itemComponent">
+        <input
+          class="form-check-input h-6 w-6 border border-white rounded-sm focus:outline-none transition checked:bg-white duration-200 cursor-pointer mr-2 itemCheckbox"
+          type="checkbox"
+          value=""
+        />
+        <label class="form-check-label inline-block group">
+          <span class="itemText"></span>
+          <button
+            class="text-red-500 transition duration-200 group-hover:opacity-100 opacity-0"
+          >
+            <svg
+              class="h-5"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              version="1.1"
+              id="Capa_1"
+              x="0px"
+              y="0px"
+              viewBox="0 0 41.336 41.336"
+              fill="currentColor"
+              xml:space="preserve"
+            >
+              <path
+                d="M36.335,5.668h-8.167V1.5c0-0.828-0.672-1.5-1.5-1.5h-12c-0.828,0-1.5,0.672-1.5,1.5v4.168H5.001c-1.104,0-2,0.896-2,2   s0.896,2,2,2h2.001v29.168c0,1.381,1.119,2.5,2.5,2.5h22.332c1.381,0,2.5-1.119,2.5-2.5V9.668h2.001c1.104,0,2-0.896,2-2   S37.438,5.668,36.335,5.668z M14.168,35.67c0,0.828-0.672,1.5-1.5,1.5s-1.5-0.672-1.5-1.5v-21c0-0.828,0.672-1.5,1.5-1.5   s1.5,0.672,1.5,1.5V35.67z M22.168,35.67c0,0.828-0.672,1.5-1.5,1.5s-1.5-0.672-1.5-1.5v-21c0-0.828,0.672-1.5,1.5-1.5   s1.5,0.672,1.5,1.5V35.67z M25.168,5.668h-9V3h9V5.668z M30.168,35.67c0,0.828-0.672,1.5-1.5,1.5s-1.5-0.672-1.5-1.5v-21   c0-0.828,0.672-1.5,1.5-1.5s1.5,0.672,1.5,1.5V35.67z"
+              />
+            </svg>
+          </button>
+        </label>
+      </div>
+    </div>
+  </head>
+  <body>
+    <div>
+      <div class="flex justify-center mt-24">
+        <div>
+          <div>
+            <h1 class="text-5xl font-bold mb-4">
+              TodoInky <span class="text-lg">v0.1</span>
+            </h1>
+          </div>
+          <div class="text-3xl">
+            <div id="listParent"></div>
+            <div class="mt-2 flex flex-row items-center">
+              <input
+                class="bg-transparent border-b-2 focus:outline-none mr-2"
+                id="addItem"
+                onkeypress="addItemPress(event)"
+              />
+              <button class="text-5xl" onclick="addItem()">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      let items = [];
+      let lastSyncedItems = [];
+
+      const exampleItem = document.getElementById('itemComponent');
+      const listParent = document.getElementById('listParent');
+
+      function createItem(item, index) {
+        const itemElement = exampleItem.cloneNode(true);
+        delete itemElement.id;
+
+        const checkbox = [...itemElement.childNodes].find((i) =>
+          i.classList?.contains('itemCheckbox')
+        );
+        const label = [
+          ...[...itemElement.childNodes].find((i) => i.nodeName === 'LABEL')
+            .childNodes,
+        ].find((i) => i.nodeName === 'SPAN');
+        const deleteButton = [
+          ...[...itemElement.childNodes].find((i) => i.nodeName === 'LABEL')
+            .childNodes,
+        ].find((i) => i.nodeName === 'BUTTON');
+        checkbox.checked = item.completed;
+        label.innerText = item.name;
+        checkbox.onchange = (event) => handleCheckboxChange(index, event);
+        deleteButton.onclick = () => removeItem(index);
+
+        listParent.appendChild(itemElement);
+      }
+
+      function renderItems() {
+        listParent.innerHTML = '';
+        items.forEach((item, index) => {
+          createItem(item, index);
+        });
+      }
+
+      function addItem() {
+        const itemInput = document.getElementById('addItem');
+        if (!itemInput.value) return;
+        const itemToAdd = { name: itemInput.value, completed: false };
+        items.push(itemToAdd);
+        itemInput.value = '';
+        renderItems();
+        syncItems();
+      }
+
+      function removeItem(index) {
+        items.splice(index, 1);
+        renderItems();
+        syncItems();
+      }
+
+      function handleCheckboxChange(index, event) {
+        items[index].completed = event.target.checked;
+        syncItems();
+      }
+
+      function addItemPress(event) {
+        if (event.keyCode == 13) addItem();
+      }
+
+      async function syncItems() {
+        if (JSON.stringify(items) === JSON.stringify(lastSyncedItems)) return;
+        const syncItems = await fetch('/syncitems', {
+          body: JSON.stringify(items),
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-type': 'application/json',
+          },
+        }).catch((err) => null);
+
+        if (!syncItems || syncItems.status != 200) return;
+
+        lastSyncedItems = JSON.parse(JSON.stringify(items));
+      }
+
+      async function fetchItems() {
+        const req = await fetch('/items').then((i) => i.json());
+        if (!req.items) return;
+        items = req.items;
+        lastSyncedItems = JSON.parse(JSON.stringify(items));
+        renderItems();
+      }
+
+      fetchItems();
+      setInterval(fetchItems, 5000);
+    </script>
+  </body>
+</html>
