@@ -10,30 +10,15 @@
     <div id="components" class="hidden">
       <div class="flex items-center" id="itemComponent">
         <input
-          class="form-check-input h-6 w-6 border border-white rounded-sm focus:outline-none transition checked:bg-white duration-200 cursor-pointer mr-2 itemCheckbox"
+          class="form-check-input h-6 w-6 border border-white rounded-sm focus:outline-none transition checked:bg-white duration-200 cursor-pointer mr-2"
           type="checkbox"
-          value=""
-        />
+          value="" />
         <label class="form-check-label inline-block group">
           <span class="itemText text-clip overflow-hidden"></span>
-          <button
-            class="text-red-500 transition duration-200 group-hover:opacity-100 opacity-0"
-          >
-            <svg
-              class="h-5"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              version="1.1"
-              id="Capa_1"
-              x="0px"
-              y="0px"
-              viewBox="0 0 41.336 41.336"
-              fill="currentColor"
-              xml:space="preserve"
-            >
+          <button class="text-red-500 transition duration-200 group-hover:opacity-100 opacity-0">
+            <svg class="h-5" x="0px" y="0px" viewBox="0 0 41.336 41.336" fill="currentColor" xml:space="preserve">
               <path
-                d="M36.335,5.668h-8.167V1.5c0-0.828-0.672-1.5-1.5-1.5h-12c-0.828,0-1.5,0.672-1.5,1.5v4.168H5.001c-1.104,0-2,0.896-2,2   s0.896,2,2,2h2.001v29.168c0,1.381,1.119,2.5,2.5,2.5h22.332c1.381,0,2.5-1.119,2.5-2.5V9.668h2.001c1.104,0,2-0.896,2-2   S37.438,5.668,36.335,5.668z M14.168,35.67c0,0.828-0.672,1.5-1.5,1.5s-1.5-0.672-1.5-1.5v-21c0-0.828,0.672-1.5,1.5-1.5   s1.5,0.672,1.5,1.5V35.67z M22.168,35.67c0,0.828-0.672,1.5-1.5,1.5s-1.5-0.672-1.5-1.5v-21c0-0.828,0.672-1.5,1.5-1.5   s1.5,0.672,1.5,1.5V35.67z M25.168,5.668h-9V3h9V5.668z M30.168,35.67c0,0.828-0.672,1.5-1.5,1.5s-1.5-0.672-1.5-1.5v-21   c0-0.828,0.672-1.5,1.5-1.5s1.5,0.672,1.5,1.5V35.67z"
-              />
+                d="M36.335,5.668h-8.167V1.5c0-0.828-0.672-1.5-1.5-1.5h-12c-0.828,0-1.5,0.672-1.5,1.5v4.168H5.001c-1.104,0-2,0.896-2,2   s0.896,2,2,2h2.001v29.168c0,1.381,1.119,2.5,2.5,2.5h22.332c1.381,0,2.5-1.119,2.5-2.5V9.668h2.001c1.104,0,2-0.896,2-2   S37.438,5.668,36.335,5.668z M14.168,35.67c0,0.828-0.672,1.5-1.5,1.5s-1.5-0.672-1.5-1.5v-21c0-0.828,0.672-1.5,1.5-1.5   s1.5,0.672,1.5,1.5V35.67z M22.168,35.67c0,0.828-0.672,1.5-1.5,1.5s-1.5-0.672-1.5-1.5v-21c0-0.828,0.672-1.5,1.5-1.5   s1.5,0.672,1.5,1.5V35.67z M25.168,5.668h-9V3h9V5.668z M30.168,35.67c0,0.828-0.672,1.5-1.5,1.5s-1.5-0.672-1.5-1.5v-21   c0-0.828,0.672-1.5,1.5-1.5s1.5,0.672,1.5,1.5V35.67z" />
             </svg>
           </button>
         </label>
@@ -41,69 +26,69 @@
     </div>
   </head>
   <body>
-    <div>
-      <div class="mt-24 mx-auto max-w-xl">
-        <div class="mx-8">
-          <div>
-            <h1 class="text-5xl font-bold mb-4">
-              TodoInky <span class="text-lg">v0.1</span>
-            </h1>
+    <div class="mt-24 mx-auto max-w-xl">
+      <div class="mx-8">
+        <div>
+          <h1 class="text-5xl font-bold mb-4">🐙 TodoInky <span class="text-lg">v0.1</span></h1>
+        </div>
+        <div class="text-3xl">
+          <div id="listParent"></div>
+          <div class="mt-2 flex flex-row items-center w-full">
+            <input
+              class="bg-transparent border-b-2 focus:outline-none mr-2 w-full rounded-none"
+              placeholder="Add an item..."
+              id="addItem"
+              onkeypress="addItemPress(event)" />
+            <button class="text-5xl transition duration-100 hover:opacity-80" onclick="addItem()">+</button>
           </div>
-          <div class="text-3xl">
-            <div id="listParent"></div>
-            <div class="mt-2 flex flex-row items-center w-full">
-              <input
-                class="bg-transparent border-b-2 focus:outline-none mr-2 w-full rounded-none"
-                placeholder="Add an item..."
-                id="addItem"
-                onkeypress="addItemPress(event)"
-              />
-              <button class="text-5xl" onclick="addItem()">+</button>
-            </div>
-          </div>
+          <div class="text-red-500 text-lg animate-pulse" id="warnSyncFailed" hidden>⚠️ Syncing Failed! Changes may be lost.</div>
         </div>
       </div>
     </div>
     <script>
-      let items = [];
-      let lastSyncedItems = [];
+      // Helper Functions
+      const $findChild = (element, func) => [...element.childNodes].find(func);
+      const $hide = element => (element.hidden = true);
+      const $show = element => (element.hidden = false);
 
-      const exampleItem = document.getElementById('itemComponent');
-      const listParent = document.getElementById('listParent');
+      let items = []; // List of current items
+      let lastSyncedItems = []; // Items last synced with backend
 
+      const itemComponent = document.getElementById('itemComponent'); // Item element to copy to list
+      const listParent = document.getElementById('listParent'); // The list parent element
+      const syncFailedWarning = document.getElementById('warnSyncFailed'); // The "Sync failed" warning
+
+      // Function to create a list item
       function createItem(item, index) {
-        const itemElement = exampleItem.cloneNode(true);
-        delete itemElement.id;
+        const itemElement = itemComponent.cloneNode(true); // Make a copy of the example element
+        delete itemElement.id; // Remove the unused ID
 
-        const checkbox = [...itemElement.childNodes].find((i) =>
-          i.classList?.contains('itemCheckbox')
-        );
-        const label = [
-          ...[...itemElement.childNodes].find((i) => i.nodeName === 'LABEL')
-            .childNodes,
-        ].find((i) => i.nodeName === 'SPAN');
-        const deleteButton = [
-          ...[...itemElement.childNodes].find((i) => i.nodeName === 'LABEL')
-            .childNodes,
-        ].find((i) => i.nodeName === 'BUTTON');
+        // Get children needing modification with helper function
+        const checkbox = $findChild(itemElement, i => i.nodeName == 'INPUT');
+        const labelParent = $findChild(itemElement, i => i.nodeName == 'LABEL');
+        const label = $findChild(labelParent, i => i.nodeName == 'SPAN');
+        const deleteButton = $findChild(labelParent, i => i.nodeName == 'BUTTON');
+
         checkbox.checked = item.completed;
         label.innerText = item.name;
-        checkbox.onchange = (event) => handleCheckboxChange(index, event);
-        deleteButton.onclick = () => removeItem(index);
+        checkbox.onchange = event => handleCheckboxChange(index, event); // Save when checkbox checked
+        deleteButton.onclick = () => removeItem(index); // Delete button removes item
 
-        listParent.appendChild(itemElement);
+        listParent.appendChild(itemElement); // Append item to list parent
       }
 
+      // Function to delete and re-create (update) item list
       function renderItems() {
-        listParent.innerHTML = '';
+        listParent.innerHTML = ''; // Clear item list
         items.forEach((item, index) => {
-          createItem(item, index);
+          createItem(item, index); // Create each item
         });
       }
 
+      // Event handler to add item to list, render, and sync
       function addItem() {
         const itemInput = document.getElementById('addItem');
-        if (!itemInput.value) return;
+        if (!itemInput.value) return; // Stop if nothing to add
         const itemToAdd = { name: itemInput.value, completed: false };
         items.push(itemToAdd);
         itemInput.value = '';
@@ -111,23 +96,27 @@
         syncItems();
       }
 
+      // Event handler in input to add item on enter (key 13) press
+      function addItemPress(event) {
+        if (event.keyCode == 13) addItem();
+      }
+
+      // Event handler to remove an item
       function removeItem(index) {
         items.splice(index, 1);
         renderItems();
         syncItems();
       }
 
+      // Event handler to sync when a box is checked
       function handleCheckboxChange(index, event) {
         items[index].completed = event.target.checked;
         syncItems();
       }
 
-      function addItemPress(event) {
-        if (event.keyCode == 13) addItem();
-      }
-
+      // Function to sync items with the server
       async function syncItems() {
-        if (JSON.stringify(items) === JSON.stringify(lastSyncedItems)) return;
+        if (JSON.stringify(items) === JSON.stringify(lastSyncedItems)) return; // If last synced item is the same as current list, stop
         const syncItems = await fetch('/syncitems', {
           body: JSON.stringify(items),
           method: 'POST',
@@ -135,23 +124,35 @@
             Accept: 'application/json',
             'Content-type': 'application/json',
           },
-        }).catch((err) => null);
+        }).catch(err => null);
 
-        if (!syncItems || syncItems.status != 200) return;
+        // Show "sync failed" if request failed, and return
+        if (!syncItems || syncItems.status != 200) return $show(syncFailedWarning);
+        $hide(syncFailedWarning);
 
         lastSyncedItems = JSON.parse(JSON.stringify(items));
       }
 
+      // Function to fetch items from the server and render them
       async function fetchItems() {
-        const req = await fetch('/items').then((i) => i.json());
-        if (!req.items) return;
+        const req = await fetch('/items')
+          .then(i => i.json())
+          .catch(err => null);
+
+        // Show "sync failed" if request failed, and return
+        if (!req?.items) return $show(syncFailedWarning);
+        $hide(syncFailedWarning);
+
+        if (JSON.stringify(req.items) === JSON.stringify(items)) return; // If no difference, do nothing
+
         items = req.items;
         lastSyncedItems = JSON.parse(JSON.stringify(items));
         renderItems();
       }
 
+      // Fetch items from server every 2.5 seconds
       fetchItems();
-      setInterval(fetchItems, 5000);
+      setInterval(fetchItems, 2500);
     </script>
   </body>
 </html>

@@ -26,6 +26,5 @@ def run_server(runner):
   loop.run_forever()
 
 def run():
-  t = threading.Thread(target=run_server, args=(aiohttp_server(),))
-  t.start()
+  t = threading.Thread(target=run_server, args=(aiohttp_server(),)).start()
   print('SERVER: Online at http://' + HOST + ':' + str(PORT))
