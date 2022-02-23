@@ -5,8 +5,8 @@ from routes import setup_routes
 import aiohttp_jinja2
 import jinja2
 
-PORT = 8080
 HOST = '0.0.0.0'
+PORT = 8080
 
 def aiohttp_server():
   app = web.Application()
@@ -26,5 +26,6 @@ def run_server(runner):
   loop.run_forever()
 
 def run():
-  t = threading.Thread(target=run_server, args=(aiohttp_server(),)).start()
-  print('SERVER: Online at http://' + HOST + ':' + str(PORT))
+  threading.Thread(target=run_server, args=(aiohttp_server(),)).start()
+  print()
+  print('[SERVER] Listening for requests at http://' + HOST + ':' + str(PORT))

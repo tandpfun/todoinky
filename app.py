@@ -1,14 +1,8 @@
 # Todo list storage
 global todoList
-todoList = [
-  {
-    "name": "Go to sleep",
-    "completed": False
-  }
-]
+todoList = []
 
-from time import sleep
-import logging
+# Import server from server file
 import server
 
 server.run()
