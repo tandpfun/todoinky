@@ -1,10 +1,8 @@
 from aiohttp import web
-import aiohttp_jinja2
 import __main__
 
-@aiohttp_jinja2.template('index.html')
 async def index(request):
-  return {"a": "b"}
+  return web.FileResponse('./index.html')
 
 async def items(request):
   return web.json_response({"items": __main__.todoList})

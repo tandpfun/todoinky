@@ -2,8 +2,6 @@ import asyncio
 import threading
 from aiohttp import web
 from routes import setup_routes
-import aiohttp_jinja2
-import jinja2
 
 HOST = '0.0.0.0'
 PORT = 8080
@@ -12,7 +10,6 @@ def aiohttp_server():
   app = web.Application()
   setup_routes(app)
   app.add_routes([web.static('/static', 'static')])
-  aiohttp_jinja2.setup(app,loader=jinja2.FileSystemLoader('templates'))
 
   runner = web.AppRunner(app)
   return runner
