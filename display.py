@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import glob
+from turtle import pos
 from PIL import Image, ImageFont, ImageDraw
 from font_hanken_grotesk import HankenGroteskBold, HankenGroteskMedium
 from font_intuitive import Intuitive
@@ -64,14 +65,6 @@ if inky_display.resolution == (250, 122):
 img = Image.new("P", inky_display.resolution)
 draw = ImageDraw.Draw(img)
 
-# Set border
-# inky_display.set_border(inky_display.BLACK)
-
-for y in range(0, inky_display.height):
-    for x in range(0, inky_display.width):
-        img.putpixel((x, y), inky_display.BLACK)
-
-
 # Load the fonts
 intuitive_font = ImageFont.truetype(Intuitive, int(22 * scale_size))
 hanken_bold_font = ImageFont.truetype(HankenGroteskBold, int(22 * scale_size))
@@ -90,6 +83,11 @@ draw.text((title_x, title_y), "TodoInky", inky_display.BLACK, font=hanken_bold_f
 
 #inky_display.show_stay_awake()
 
+def createCheckbox(position, width, checked=False):
+  for y in range(position[0], position[0] + width):
+    for x in range(position[1], position[1] + width):
+        img.putpixel((x, y), inky_display.BLACK)
+
 def addItem(text, position):
   item_w, item_h = hanken_medium_font.getsize(text)
   draw.text((50, 40*position + 60), text, inky_display.BLACK, font=hanken_medium_font)
@@ -97,6 +95,7 @@ def addItem(text, position):
 addItem('Go to school', 0)
 addItem('Go to school', 1)
 addItem('Go to school', 2)
+createCheckbox((100, 100), 10)
 
 print(icons)
 print(masks)
