@@ -1,5 +1,6 @@
 from threading import Thread, Timer
 import copy
+from turtle import update
 
 # Todo list storage
 global todoList
@@ -18,7 +19,7 @@ def set_interval(func, sec):
   t.start()
   return t
 
-lastDisplayed = copy.deepcopy(todoList)
+lastDisplayed = []
 def updateDisplay():
   global lastDisplayed
   if todoList == lastDisplayed: return
@@ -30,4 +31,5 @@ import server
 import display
 
 set_interval(updateDisplay, 2.5)
+updateDisplay()
 server.run()
