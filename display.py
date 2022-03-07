@@ -87,8 +87,8 @@ def createCheckbox(position, checked=False):
   width = 30
   small_border_width = 3
 
-  for y in range(position[0], position[0] + width):
-    for x in range(position[1], position[1] + width):
+  for x in range(position[0], position[0] + width):
+    for y in range(position[1], position[1] + width):
         img.putpixel((x, y), inky_display.BLACK)
 
   if checked:
