@@ -42,14 +42,12 @@ hanken_medium_font = ImageFont.truetype(HankenGroteskMedium, int(16 * scale_size
 y_top = int(inky_display.height * (5.0 / 10.0))
 y_bottom = y_top + int(inky_display.height * (4.0 / 10.0))
 
-# Calculate the positioning and draw the "Hello" text
-title_w, title_h = hanken_bold_font.getsize("TodoInky")
-# hello_x = int((inky_display.width - hello_w) / 2)
-title_x = 5
-title_y = 0
-draw.text((title_x, title_y), "TodoInky", inky_display.BLACK, font=hanken_bold_font)
-
 #inky_display.show_stay_awake()
+
+def clearDisplay():
+  for x in range(0, inky_display.width):
+    for y in range(0, inky_display.height):
+        img.putpixel((x, y), inky_display.WHITE)
 
 def createCheckbox(position, checked=False):
   width = 30
@@ -67,15 +65,17 @@ def createCheckbox(position, checked=False):
         img.putpixel((x, y), inky_display.WHITE)
 
 def addItem(text, position, checked=False):
-  item_w, item_h = hanken_medium_font.getsize(text)
   draw.text((50, 40 * position + 60), text, inky_display.BLACK, font=hanken_medium_font)
   createCheckbox((15, 40*position + 65), checked)
     
-addItem('Go to school', 0, True)
-addItem('Take a walk', 1, True)
-addItem('Do homework', 2, False)
-addItem('Stop gaming', 3, False)
+def showItems(items):
+  clearDisplay()
+  
+  draw.text((5, 0), "TodoInky", inky_display.BLACK, font=hanken_bold_font)
 
-inky_display.set_image(img)
-inky_display.show()
-#inky_display.show_stay_awake()
+  i = 0
+  for item in items:
+    addItem(item.text, i, item.checked)
+    i = i+1
+  inky_display.set_image(img)
+  inky_display.show()
