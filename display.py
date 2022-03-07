@@ -39,7 +39,7 @@ masks = {}
 
 # Load our icon files and generate masks
 for icon in glob.glob(os.path.join(PATH, "resources/*.png")):
-  icon_name = icon.replace(".png", "")
+  icon_name = icon.split("resources/")[1].replace(".png", "")
   icon_image = Image.open(icon)
   icons[icon_name] = icon_image
   masks[icon_name] = create_mask(icon_image)
@@ -89,9 +89,6 @@ def addItem(text, position):
   item_w, item_h = hanken_medium_font.getsize(text)
   draw.text((50, 40*position + 60), text, inky_display.BLACK, font=hanken_medium_font)
     
-print(icons)
-print(masks)
-
 addItem('Go to school', 0)
 addItem('Go to school', 1)
 addItem('Go to school', 2)
