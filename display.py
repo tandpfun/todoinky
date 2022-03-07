@@ -77,7 +77,7 @@ def showItems(items):
   i = 0
   for item in items:
     print(item)
-    addItem(item.name, i, item.checked)
+    addItem(item['name'], i, item['checked'])
     i = i+1
   inky_display.set_image(img)
   inky_display.show()
