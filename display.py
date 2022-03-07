@@ -103,8 +103,8 @@ def createCheckbox(position, checked=False):
 
 def addItem(text, position, checked=False):
   item_w, item_h = hanken_medium_font.getsize(text)
-  draw.text((50, 40*position + 60), text, inky_display.BLACK, font=hanken_medium_font)
-  createCheckbox((0, 40*position + 60), False)
+  draw.text((50, 40 * position + 60), text, inky_display.BLACK, font=hanken_medium_font)
+  createCheckbox((15, 40*position + 70), False)
     
 addItem('Go to school', 0)
 addItem('Go to school', 1)
