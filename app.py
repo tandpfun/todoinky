@@ -30,6 +30,6 @@ def updateDisplay():
 import server
 import display
 
-set_interval(updateDisplay, 2.5)
+set_interval(updateDisplay, 4)
 updateDisplay()
 server.run()
