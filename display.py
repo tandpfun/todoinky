@@ -83,7 +83,10 @@ draw.text((title_x, title_y), "TodoInky", inky_display.BLACK, font=hanken_bold_f
 
 #inky_display.show_stay_awake()
 
-def createCheckbox(position, width, checked=False):
+def createCheckbox(position, checked=False):
+  width = 30
+  small_border_width = 3
+
   for y in range(position[0], position[0] + width):
     for x in range(position[1], position[1] + width):
         img.putpixel((x, y), inky_display.BLACK)
@@ -92,20 +95,20 @@ def createCheckbox(position, width, checked=False):
     print('checked')
   else:
     print('not checked')
-    small_width = width - 6
-    small_pos = (position[0] + 3, position[1] + 3)
+    small_width = width - (small_border_width*2)
+    small_pos = (position[0] + small_border_width, position[1] + small_border_width)
     for y in range(small_pos[0], small_pos[0] + small_width):
       for x in range(small_pos[1], small_pos[1] + small_width):
         img.putpixel((x, y), inky_display.WHITE)
 
-def addItem(text, position):
+def addItem(text, position, checked=False):
   item_w, item_h = hanken_medium_font.getsize(text)
   draw.text((50, 40*position + 60), text, inky_display.BLACK, font=hanken_medium_font)
+  createCheckbox((0, 40*position + 60), False)
     
 addItem('Go to school', 0)
 addItem('Go to school', 1)
 addItem('Go to school', 2)
-createCheckbox((100, 100), 30)
 
 print(icons)
 print(masks)
