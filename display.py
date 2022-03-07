@@ -61,7 +61,7 @@ if inky_display.resolution == (250, 122):
     padding = -5
 
 # Set border
-inky_display.set_border(inky_display.BLACK)
+# inky_display.set_border(inky_display.BLACK)
 
 # Create a new canvas to draw on
 img = Image.new("P", inky_display.resolution)
@@ -93,7 +93,8 @@ addItem('Go to school', 0)
 addItem('Go to school', 1)
 addItem('Go to school', 2)
 
-img.paste(icons['full-cb'], (28, 36), masks['full-cb'])
+img.paste(icons['full-cb'], (100, 100), masks['full-cb'])
+img.paste(icons['empty-cb'], (50, 50), masks['empty-cb'])
 
 inky_display.set_image(img)
 inky_display.show()
