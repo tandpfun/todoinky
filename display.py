@@ -39,7 +39,7 @@ masks = {}
 
 # Load our icon files and generate masks
 for icon in glob.glob(os.path.join(PATH, "resources/*.png")):
-  icon_name = icon.split("icon-")[1].replace(".png", "")
+  icon_name = icon.replace(".png", "")
   icon_image = Image.open(icon)
   icons[icon_name] = icon_image
   masks[icon_name] = create_mask(icon_image)
