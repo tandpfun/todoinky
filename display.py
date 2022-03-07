@@ -89,6 +89,9 @@ def addItem(text, position):
   item_w, item_h = hanken_medium_font.getsize(text)
   draw.text((50, 40*position + 60), text, inky_display.BLACK, font=hanken_medium_font)
     
+print(icons)
+print(masks)
+
 addItem('Go to school', 0)
 addItem('Go to school', 1)
 addItem('Go to school', 2)
