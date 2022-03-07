@@ -20,6 +20,7 @@ def set_interval(func, sec):
 
 lastDisplayed = copy.deepcopy(todoList)
 def updateDisplay():
+  global lastDisplayed
   if todoList == lastDisplayed: return
   lastDisplayed = copy.deepcopy(todoList)
   Thread(target=display.showItems, args=(todoList,)).start()
