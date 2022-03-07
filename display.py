@@ -42,7 +42,7 @@ for icon in glob.glob(os.path.join(PATH, "resources/*.png")):
   icon_name = icon.split("resources/")[1].replace(".png", "")
   icon_image = Image.open(icon)
   icons[icon_name] = icon_image
-  masks[icon_name] = create_mask(icon_image, (inky_display.BLACK))
+  masks[icon_name] = create_mask(icon_image)
 
 # Figure out scaling for display size
 scale_size = 1.0
