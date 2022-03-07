@@ -93,10 +93,12 @@ addItem('Go to school', 0)
 addItem('Go to school', 1)
 addItem('Go to school', 2)
 
+print(icons)
+print(masks)
+
 img.paste(icons['full-cb'], (100, 100), masks['full-cb'])
 img.paste(icons['empty-cb'], (50, 50), masks['empty-cb'])
 
 inky_display.set_image(img)
 inky_display.show()
 #inky_display.show_stay_awake()
-
