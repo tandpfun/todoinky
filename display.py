@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import glob
+import __main__
 from turtle import pos
 from PIL import Image, ImageFont, ImageDraw
 from font_hanken_grotesk import HankenGroteskBold, HankenGroteskMedium
@@ -68,6 +68,7 @@ def addItem(text, position, checked=False):
   draw.text((50, 40 * position + 60), text, inky_display.BLACK, font=hanken_medium_font)
   createCheckbox((15, 40*position + 65), checked)
     
+
 def showItems(items):
   clearDisplay()
   

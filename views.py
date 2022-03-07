@@ -20,5 +20,4 @@ async def sync(request):
     return web.Response(text='Too many items', status=400)
 
   __main__.todoList = body
-  __main__.updateDisplay()
   return web.json_response({"items": __main__.todoList})
