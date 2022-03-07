@@ -97,8 +97,8 @@ def createCheckbox(position, checked=False):
     print('not checked')
     small_width = width - (small_border_width*2)
     small_pos = (position[0] + small_border_width, position[1] + small_border_width)
-    for y in range(small_pos[0], small_pos[0] + small_width):
-      for x in range(small_pos[1], small_pos[1] + small_width):
+    for x in range(small_pos[0], small_pos[0] + small_width):
+      for y in range(small_pos[1], small_pos[1] + small_width):
         img.putpixel((x, y), inky_display.WHITE)
 
 def addItem(text, position, checked=False):
