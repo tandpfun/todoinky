@@ -69,14 +69,12 @@ def addItem(text, position, checked=False):
   createCheckbox((15, 40*position + 65), checked)
     
 def showItems(items):
-  print(items)
   clearDisplay()
   
   draw.text((5, 0), "TodoInky", inky_display.BLACK, font=hanken_bold_font)
 
   i = 0
   for item in items:
-    print(item)
     addItem(item['name'], i, item['completed'])
     i = i+1
   inky_display.set_image(img)
