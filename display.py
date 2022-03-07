@@ -88,6 +88,16 @@ def createCheckbox(position, width, checked=False):
     for x in range(position[1], position[1] + width):
         img.putpixel((x, y), inky_display.BLACK)
 
+  if checked:
+    print('checked')
+  else:
+    print('not checked')
+    small_width = 15
+    small_pos = (position[0] + 5, position[1] + 5)
+    for y in range(small_pos[0], small_pos[0] + small_width):
+      for x in range(small_pos[1], small_pos[1] + small_width):
+        img.putpixel((x, y), inky_display.WHITE)
+
 def addItem(text, position):
   item_w, item_h = hanken_medium_font.getsize(text)
   draw.text((50, 40*position + 60), text, inky_display.BLACK, font=hanken_medium_font)
@@ -95,7 +105,7 @@ def addItem(text, position):
 addItem('Go to school', 0)
 addItem('Go to school', 1)
 addItem('Go to school', 2)
-createCheckbox((100, 100), 10)
+createCheckbox((100, 100), 25)
 
 print(icons)
 print(masks)
