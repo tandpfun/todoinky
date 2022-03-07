@@ -1,3 +1,5 @@
+from threading import Thread
+
 # Todo list storage
 global todoList
 todoList = [
@@ -8,11 +10,11 @@ todoList = [
 ]
 
 def updateDisplay():
-  display.showItems(todoList)
+  Thread(target=display.showItems, args=(todoList,)).start()
 
 # Import server from server file
 import server
 import display
 
-server.run()
 updateDisplay()
+server.run()
