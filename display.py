@@ -60,12 +60,20 @@ if inky_display.resolution == (250, 122):
     scale_size = 1.30
     padding = -5
 
-# Set border
-# inky_display.set_border(inky_display.BLACK)
-
 # Create a new canvas to draw on
 img = Image.new("P", inky_display.resolution)
 draw = ImageDraw.Draw(img)
+
+y_top = int(inky_display.height * (5.0 / 10.0))
+y_bottom = y_top + int(inky_display.height * (4.0 / 10.0))
+
+# Set border
+# inky_display.set_border(inky_display.BLACK)
+
+for y in range(y_bottom, inky_display.height):
+    for x in range(0, inky_display.width):
+        img.putpixel((x, y), inky_display.BLACK)
+
 
 # Load the fonts
 intuitive_font = ImageFont.truetype(Intuitive, int(22 * scale_size))
