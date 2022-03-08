@@ -16,7 +16,7 @@ async def sync(request):
     if not "name" in item or not "completed" in item:
       return web.Response(text='Invalid items', status=400)
   
-  if len(body) > 50:
+  if len(body) > 5:
     return web.Response(text='Too many items', status=400)
 
   __main__.todoList = body
