@@ -96,4 +96,4 @@ def updateDisplay():
 def start():
   while True:
     updateDisplay()
-    sleep(5)
+    sleep(1)
