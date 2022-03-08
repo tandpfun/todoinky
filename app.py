@@ -21,7 +21,7 @@ def set_interval(func, sec):
 
 lastDisplayed = []
 def updateDisplay():
-  global lastDisplayed
+  global lastDisplayed, todoList
   print(lastDisplayed)
   if todoList == lastDisplayed: return
   lastDisplayed = copy.deepcopy(todoList)
