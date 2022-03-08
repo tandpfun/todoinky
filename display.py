@@ -89,9 +89,9 @@ def updateDisplay():
   print('updating...')
   if __main__.todoList == lastDisplayed: return
   print('changes found')
+  lastDisplayed = copy.deepcopy(__main__.todoList)
   showItems(__main__.todoList)
   print('updated thread')
-  lastDisplayed = copy.deepcopy(__main__.todoList)
 
 def start():
   while True:
