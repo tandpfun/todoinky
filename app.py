@@ -25,7 +25,7 @@ def updateDisplay():
   print('updating...')
   if todoList == lastDisplayed: return
   print('changes found')
-  Thread(target=display.showItems, args=(todoList,)).start()
+  display.showItems(todoList)
   print('updated thread')
   lastDisplayed = copy.deepcopy(todoList)
 
