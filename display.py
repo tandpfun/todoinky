@@ -70,6 +70,7 @@ def addItem(text, position, checked=False):
     
 
 def showItems(items):
+  print(items)
   clearDisplay()
   
   draw.text((5, 0), "TodoInky", inky_display.BLACK, font=hanken_bold_font)

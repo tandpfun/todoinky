@@ -22,10 +22,12 @@ def set_interval(func, sec):
 lastDisplayed = []
 def updateDisplay():
   global lastDisplayed, todoList
-  print(lastDisplayed)
+  print('updating...')
   if todoList == lastDisplayed: return
-  lastDisplayed = copy.deepcopy(todoList)
+  print('changes found')
   Thread(target=display.showItems, args=(todoList,)).start()
+  print('updated thread')
+  lastDisplayed = copy.deepcopy(todoList)
 
 # Import server from server file
 import server
