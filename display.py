@@ -7,6 +7,7 @@ from font_hanken_grotesk import HankenGroteskBold, HankenGroteskMedium
 from font_intuitive import Intuitive
 from inky import InkyWHAT
 from time import sleep
+import copy
 import os
 try:
   inky_display = InkyWHAT('black')
@@ -81,3 +82,18 @@ def showItems(items):
     i = i+1
   inky_display.set_image(img)
   inky_display.show()
+
+lastDisplayed = []
+def updateDisplay():
+  global lastDisplayed
+  print('updating...')
+  if __main__.todoList == lastDisplayed: return
+  print('changes found')
+  showItems(__main__.todoList)
+  print('updated thread')
+  lastDisplayed = copy.deepcopy(__main__.todoList)
+
+def start():
+  while True:
+    updateDisplay()
+    sleep(5)

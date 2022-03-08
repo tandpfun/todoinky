@@ -1,5 +1,4 @@
 from threading import Thread, Timer
-import copy
 from turtle import update
 
 # Todo list storage
@@ -19,20 +18,9 @@ def set_interval(func, sec):
   t.start()
   return t
 
-lastDisplayed = []
-def updateDisplay():
-  global lastDisplayed, todoList
-  print('updating...')
-  if todoList == lastDisplayed: return
-  print('changes found')
-  display.showItems(todoList)
-  print('updated thread')
-  lastDisplayed = copy.deepcopy(todoList)
-
 # Import server from server file
 import server
 import display
 
-set_interval(updateDisplay, 5)
-updateDisplay()
+Thread(target=display.start).start()
 server.run()
