@@ -69,11 +69,8 @@ def addItem(text, position, checked=False):
     
 
 def showItems(items):
-  print(items)
   clearDisplay()
-  
   draw.text((5, 0), "TodoInky", inky_display.BLACK, font=hanken_bold_font)
-
   i = 0
   for item in items:
     addItem(item['name'], i, item['completed'])
@@ -84,14 +81,13 @@ def showItems(items):
 lastDisplayed = []
 def updateDisplay():
   global lastDisplayed
-  print('updating...')
   if __main__.todoList == lastDisplayed: return
-  print('changes found')
+  print('Changes found!')
   lastDisplayed = copy.deepcopy(__main__.todoList)
   showItems(__main__.todoList)
-  print('updated thread')
+  print('Updated display')
 
 def start():
   while True:
     updateDisplay()
-    sleep(.5)
+    sleep(.25)
