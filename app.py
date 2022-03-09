@@ -1,5 +1,4 @@
 from threading import Thread, Timer
-from turtle import update
 
 # Todo list storage
 global todoList

@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
-
 import __main__
-from turtle import pos
+import copy
 from PIL import Image, ImageFont, ImageDraw
 from font_hanken_grotesk import HankenGroteskBold, HankenGroteskMedium
 from font_intuitive import Intuitive
 from inky import InkyWHAT
 from time import sleep
-import copy
-import os
+
 try:
   inky_display = InkyWHAT('black')
   #inky_display = inky_fast.InkyPHATFast("black")
@@ -96,4 +94,4 @@ def updateDisplay():
 def start():
   while True:
     updateDisplay()
-    sleep(1)
+    sleep(.5)
