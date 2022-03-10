@@ -31,10 +31,14 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 def handleButtonPress(index):
+  print(todoList[index]['completed'])
+  print(index)
   if todoList[index]['completed'] == True:
     todoList[index]['completed'] == False
   else:
     todoList[index]['completed'] == True
+
+  print(todoList[index]['completed'])
 
 currentPressState = False
 while True:
@@ -42,6 +46,7 @@ while True:
   if input_state == False and currentPressState == False:
     currentPressState = True
     handleButtonPress(0)
+    print('pressed')
   
   if input_state == True:
     currentPressState = False
