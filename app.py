@@ -56,14 +56,16 @@ def handleButtonPress(pin):
 
 currentPressState = False
 while True:
+  any_pressed = False
   for pin in buttons.keys():
     input_state = GPIO.input(pin)
     if input_state == False and currentPressState == False:
+      any_pressed = True
       currentPressState = True
       handleButtonPress(pin)
       print('Pressed pin ' + str(pin))
 
-    if input_state == True:
-      currentPressState = False
+  if any_pressed == False:
+    currentPressState = False
   
   sleep(0.01)
