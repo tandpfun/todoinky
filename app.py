@@ -29,8 +29,15 @@ server.run()
 # Buttons
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+currentPressState = False
 while True:
   input_state = GPIO.input(23)
-  if input_state == False:
+  if input_state == False and currentPressState == False:
+    currentPressState = True
     print('Button Pressed')
-    sleep(0.2)
+  
+  if input_state == True:
+    currentPressState = False
+  
+  sleep(0.01)
