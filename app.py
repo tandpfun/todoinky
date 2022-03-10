@@ -34,9 +34,9 @@ def handleButtonPress(index):
   print(todoList[index]['completed'])
   print(index)
   if todoList[index]['completed'] == True:
-    todoList[index]['completed'] == False
+    todoList[index]['completed'] = False
   else:
-    todoList[index]['completed'] == True
+    todoList[index]['completed'] = True
 
   print(todoList[index]['completed'])
 
