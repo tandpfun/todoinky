@@ -27,28 +27,43 @@ Thread(target=display.start).start()
 server.run()
 
 # Buttons
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+buttons = {
+  0: 0,
+  1: 1,
+  5: 2,
+  23: 3,
+  24: 4
+}
 
-def handleButtonPress(index):
-  print(todoList[index]['completed'])
-  print(index)
+GPIO.setmode(GPIO.BCM)
+
+for pin in buttons.keys():
+  GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+def handleButtonPress(pin):
+  if not pin in buttons:
+    return print('[!] Button not in pins')
+  
+  index = buttons[pin]
+
+  if len(todoList) - 1 < index:
+    return print('[!] No item for the button pressed')
+
   if todoList[index]['completed'] == True:
     todoList[index]['completed'] = False
   else:
     todoList[index]['completed'] = True
 
-  print(todoList[index]['completed'])
-
 currentPressState = False
 while True:
-  input_state = GPIO.input(23)
-  if input_state == False and currentPressState == False:
-    currentPressState = True
-    handleButtonPress(0)
-    print('pressed')
-  
-  if input_state == True:
-    currentPressState = False
+  for pin in buttons.keys():
+    input_state = GPIO.input(pin)
+    if input_state == False and currentPressState == False:
+      currentPressState = True
+      handleButtonPress(pin)
+      print('Pressed pin ' + pin)
+
+    if input_state == True:
+      currentPressState = False
   
   sleep(0.01)
