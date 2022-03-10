@@ -60,10 +60,12 @@ while True:
   for pin in buttons.keys():
     input_state = GPIO.input(pin)
     if input_state == False and currentPressState == False:
-      any_pressed = True
       currentPressState = True
       handleButtonPress(pin)
       print('Pressed pin ' + str(pin))
+
+    if input_state == False:
+      any_pressed = True
 
   if any_pressed == False:
     currentPressState = False
