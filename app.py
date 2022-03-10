@@ -61,7 +61,7 @@ while True:
     if input_state == False and currentPressState == False:
       currentPressState = True
       handleButtonPress(pin)
-      print('Pressed pin ' + pin)
+      print('Pressed pin ' + str(pin))
 
     if input_state == True:
       currentPressState = False
