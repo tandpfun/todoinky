@@ -1,4 +1,6 @@
 from threading import Thread, Timer
+from time import sleep
+import RPi.GPIO as GPIO
 
 # Todo list storage
 global todoList
@@ -23,3 +25,12 @@ import display
 
 Thread(target=display.start).start()
 server.run()
+
+# Buttons
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(19, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+while True:
+  input_state = GPIO.input(19)
+  if input_state == False:
+    print('Button Pressed')
+    sleep(0.2)
