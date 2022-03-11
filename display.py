@@ -65,7 +65,7 @@ def createCheckbox(position, checked=False):
 
 def addItem(text, position, checked=False):
   draw.text((50, 45 * position + 60), text, inky_display.BLACK, font=hanken_medium_font)
-  createCheckbox((15, 40*position + 65), checked)
+  createCheckbox((15, 45 * position + 65), checked)
     
 
 def showItems(items):
