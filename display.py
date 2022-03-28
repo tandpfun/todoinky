@@ -72,7 +72,7 @@ def addItem(text, position, checked=False):
 def showItems(items):
   clearDisplay()
   draw.text((5, 0), "TodoInky", inky_display.BLACK, font=hanken_bold_font)
-  draw.text((5, 250), "10.1.8.130:1337", inky_display.BLACK, font=hanken_small_font)
+  draw.text((5, 280), "10.1.8.130:1337", inky_display.BLACK, font=hanken_small_font)
   i = 0
   for item in items:
     addItem(item['name'], i, item['completed'])
