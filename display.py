@@ -65,7 +65,7 @@ def createCheckbox(position, checked=False):
         img.putpixel((x, y), inky_display.WHITE)
 
 def addItem(text, position, checked=False):
-  draw.text((50, 45 * position + 70), text, inky_display.BLACK, font=hanken_medium_font)
+  draw.text((50, 45 * position + 60), text, inky_display.BLACK, font=hanken_medium_font)
   createCheckbox((15, 45 * position + 65), checked)
     
 
