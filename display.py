@@ -37,7 +37,7 @@ draw = ImageDraw.Draw(img)
 intuitive_font = ImageFont.truetype(Intuitive, int(22 * scale_size))
 hanken_bold_font = ImageFont.truetype(HankenGroteskBold, int(22 * scale_size))
 hanken_medium_font = ImageFont.truetype(HankenGroteskMedium, int(16 * scale_size))
-hanken_small_font = ImageFont.truetype(HankenGroteskMedium, int(12 * scale_size))
+hanken_small_font = ImageFont.truetype(HankenGroteskBold, int(8 * scale_size))
 
 y_top = int(inky_display.height * (5.0 / 10.0))
 y_bottom = y_top + int(inky_display.height * (4.0 / 10.0))
@@ -72,7 +72,7 @@ def addItem(text, position, checked=False):
 def showItems(items):
   clearDisplay()
   draw.text((5, 0), "TodoInky", inky_display.BLACK, font=hanken_bold_font)
-  draw.text((100, 0), __main__.ip_address + ":1337", inky_display.BLACK, font=hanken_small_font)
+  draw.text((5, 250), "10.1.8.130:1337", inky_display.BLACK, font=hanken_small_font)
   i = 0
   for item in items:
     addItem(item['name'], i, item['completed'])

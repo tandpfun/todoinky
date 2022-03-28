@@ -20,12 +20,8 @@ def set_interval(func, sec):
   return t
 
 # Import server from server file
-import socket
 import server
 import display
-
-hostname = socket.gethostname()   
-ip_address = socket.gethostbyname(hostname)
 
 Thread(target=display.start).start()
 server.run()
