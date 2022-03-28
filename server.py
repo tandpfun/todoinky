@@ -4,7 +4,7 @@ from aiohttp import web
 from routes import setup_routes
 
 HOST = '0.0.0.0'
-PORT = 8080
+PORT = 1337
 
 def aiohttp_server():
   app = web.Application()
