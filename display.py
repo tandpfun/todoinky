@@ -36,7 +36,7 @@ draw = ImageDraw.Draw(img)
 # Load the fonts
 intuitive_font = ImageFont.truetype(Intuitive, int(22 * scale_size))
 hanken_bold_font = ImageFont.truetype(HankenGroteskBold, int(22 * scale_size))
-hanken_medium_font = ImageFont.truetype(HankenGroteskMedium, int(16 * scale_size))
+hanken_medium_font = ImageFont.truetype(HankenGroteskMedium, int(12 * scale_size))
 hanken_small_font = ImageFont.truetype(HankenGroteskBold, int(8 * scale_size))
 
 y_top = int(inky_display.height * (5.0 / 10.0))
@@ -65,7 +65,7 @@ def createCheckbox(position, checked=False):
         img.putpixel((x, y), inky_display.WHITE)
 
 def addItem(text, position, checked=False):
-  draw.text((50, 45 * position + 60), text, inky_display.BLACK, font=hanken_medium_font)
+  draw.text((50, 45 * position + 70), text, inky_display.BLACK, font=hanken_medium_font)
   createCheckbox((15, 45 * position + 65), checked)
     
 
